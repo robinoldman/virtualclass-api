@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-3siz531#q%)q^+*vx(#-vw0!09*ke#c)pqd=*d6(f12f!w=q47
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['8000-robinoldman-virtualclas-003eserfw5m.ws-eu102.gitpod.io']
 
 
 # Application definition
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'rest_framework',
 
     'profiles', 
 
@@ -65,8 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'virtualclas.urls
-'
+ROOT_URLCONF = 'virtualclas.urls'
 
 TEMPLATES = [
     {
