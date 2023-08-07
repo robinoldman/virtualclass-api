@@ -63,7 +63,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['8000-robinoldman-virtualclas-003eserfw5m.ws-eu102.gitpod.io', 'localhost', 'virtualclassapi.herokuapp.com']
+ALLOWED_HOSTS = ['8000-robinoldman-virtualclas-003eserfw5m.ws-eu102.gitpod.io', 'localhost', 
+'https://git.heroku.com/virtualclassapi.git']
 
 
 # Application definition
