@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'posts',
     'comments',
+    'assignments',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'django.contrib.sites',
