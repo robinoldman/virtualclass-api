@@ -64,7 +64,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['8000-robinoldman-virtualclas-003eserfw5m.ws-eu102.gitpod.io', 'localhost', 
+ALLOWED_HOSTS = ['8000-robinoldman-virtualclas-003eserfw5m.ws-eu104.gitpod.io', 'localhost', 
 'virtualclassapi-2c20ab038085.herokuapp.com']
 
 if 'CLIENT_ORIGIN' in os.environ:
@@ -159,7 +159,7 @@ if 'DEV' in os.environ:
      }
 else:
     DATABASES = {
-         'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+         'default': dj_database_url.parse(os.environ.get("postgres://wxnltetf:KWYZI9A94_0gTnTjmjeA7Qb5yGyJWd6_@surus.db.elephantsql.com/wxnltetf"))
      }
    
 
