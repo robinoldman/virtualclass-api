@@ -122,12 +122,11 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-
-
-CORS_ALLOW_CREDENTIALS = True
+#CORS_ALLOW_CREDENTIALS = True
 
 
 ROOT_URLCONF = 'virtualclas.urls'
+
 
 TEMPLATES = [
     {
