@@ -65,7 +65,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = ['8000-robinoldman-virtualclas-003eserfw5m.ws-eu104.gitpod.io', 'localhost', 
-'https://virtualclassapi-47c98bf9be9a.herokuapp.com/']
+'virtualclassapi-47c98bf9be9a.herokuapp.com/']
 
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
