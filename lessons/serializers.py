@@ -1,11 +1,11 @@
-'''from rest_framework import serializers 
-from lesson.models import lesson 
+from rest_framework import serializers 
+from lessons.models import Lessons
 
 
-class LessonSerializer(serializers.ModelSerializer):
+class LessonsSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
-    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+    
     
 
     
@@ -14,11 +14,8 @@ class LessonSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     class Meta:
-        model = Comment
+        model = Lessons
         fields = ['id', 'owner', 'is_owner', 
         'profile_image', 'post', 
         'created_at', 'updated_at', 'content'] 
 
-class LessonDetailSerializer(LessonSerializer):
-    
-    post = serializers.ReadOnlyField(source='post.id')
