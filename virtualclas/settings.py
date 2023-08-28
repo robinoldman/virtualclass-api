@@ -62,7 +62,9 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV' in os.environ
+#DEBUG = 'DEV' in os.environ
+
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-robinoldman-virtualclas-003eserfw5m.ws-eu104.gitpod.io',
