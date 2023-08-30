@@ -65,7 +65,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = 'DEV' in os.environ
 
-DEBUG = True
+DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
     '8000-robinoldman-virtualclas-003eserfw5m.ws-eu104.gitpod.io',
@@ -105,8 +105,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount', 
-    'corsheaders',
     'dj_rest_auth.registration',
+    'corsheaders',
+    
    
     'profiles', 
     'django_filters',
