@@ -94,13 +94,13 @@ INSTALLED_APPS = [
     'comments',
     'assignments',
     'lessons',
-    
-    'rest_framework.authtoken',
-    'dj_rest_auth',
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    'django.contrib.sites',
+    
     'dj_rest_auth.registration',
     'corsheaders',
     
