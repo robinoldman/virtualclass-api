@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-
+import re
 
 if os.path.exists('env.py'):
     import env
@@ -44,6 +44,7 @@ if 'DEV' not in os.environ:
         'rest_framework.renderers.JSONRenderer',
     ]
 
+
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = 'my-app-auth'
@@ -54,8 +55,6 @@ REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'virtualclas.serializers.CurrentUserSerializer'
 }
 
-CSRF_TRUSTED_ORIGINS = ['https://virtualclassapi-47c98bf9be9a.herokuapp.com']
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -65,17 +64,26 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = 'DEV' in os.environ
 
-DEBUG = 'DEBUG' in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    os.environ.get('ALLOWED_HOST'),
+    '8000-robinoldman-virtualclas-003eserfw5m.ws-eu104.gitpod.io',
     'localhost',
-   
+    'virtualclassapi-47c98bf9be9a.herokuapp.com'
 ]
 
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
 
-CORS_ALLOWED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
-
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(
+        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
+    ).group(0)
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
 
 # Application definition
 
@@ -86,7 +94,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'cloudinary_storage',
-    
     'django.contrib.staticfiles',
     'cloudinary',
     'rest_framework',
@@ -94,16 +101,15 @@ INSTALLED_APPS = [
     'comments',
     'assignments',
     'lessons',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'django.contrib.sites',
-    
-    'dj_rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount', 
     'corsheaders',
-    
+    'dj_rest_auth.registration',
+   
     'profiles', 
     'django_filters',
 
