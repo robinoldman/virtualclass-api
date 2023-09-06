@@ -4,6 +4,46 @@ Welcome robinoldman,
 
 POSSIBLE DATABASE postgres://mdbzjobfumtyrg:fa41208e2fb417a91d354befaba505c8b456e6581aafe66ad406b1a03bef1941@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com:5432/dc8i184kjh8i7d
 
+
+ALLOWED_HOSTS = [
+    os.environ.get('ALLOWED_HOST'),
+    '8000-robinoldman-virtualclas-pndj7n5qtrs.ws-eu104.gitpod.io',
+    'localhost',
+    'virtualclassapi-47c98bf9be9a.herokuapp.com'
+]
+
+import os
+
+os.environ['CLOUDIANRY_URL'] = 'cloudinary://962444711949455:IEF70dVolBgsnC0nr_HzBPQZYuA@dwpdkpzlx'
+os.environ['SECRET_KEY'] = 'SecretKeyRobinOldman'
+#os.environ['DEV'] = '1'
+os.environ['CLIENT_ORIGIN'] = 'https://3000-robinoldman-virtualclas-bv0hal62iso.ws-eu104.gitpod.io'
+os.environ['ALLOWED_HOST'] = '8000-robinoldman-virtualclas-pndj7n5qtrs.ws-eu104.gitpod.io'
+os.environ['DATABASE_URL'] = 'postgres://wxnltetf:KWYZI9A94_0gTnTjmjeA7Qb5yGyJWd6_@surus.db.elephantsql.com/wxnltetf'
+
+pip freeze > requirements.txt
+
+asgiref==3.7.2
+cloudinary==1.33.0
+dj-database-url==0.5.0
+dj-rest-auth==2.1.9
+Django==3.2.20
+django-allauth==0.44.0
+django-cloudinary-storage==0.3.0
+django-cors-headers==4.2.0
+django-filter==23.2
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.2.2
+gunicorn==21.2.0
+oauthlib==3.2.2
+Pillow==10.0.0
+psycopg2==2.9.7
+PyJWT==2.8.0
+python3-openid==3.2.0
+requests-oauthlib==1.3.1
+sqlparse==0.4.4
+urllib3==1.26.16
+
 This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
 
 You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**

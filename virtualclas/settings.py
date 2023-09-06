@@ -69,9 +69,8 @@ DEBUG = 'DEBUG' in os.environ
 
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
-    '8000-robinoldman-virtualclas-pndj7n5qtrs.ws-eu104.gitpod.io',
     'localhost',
-    'virtualclassapi-47c98bf9be9a.herokuapp.com'
+   
 ]
 
 
@@ -87,6 +86,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'cloudinary_storage',
+    
     'django.contrib.staticfiles',
     'cloudinary',
     'rest_framework',
@@ -94,16 +94,16 @@ INSTALLED_APPS = [
     'comments',
     'assignments',
     'lessons',
+    
     'rest_framework.authtoken',
     'dj_rest_auth',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount', 
+    'allauth.socialaccount',
     'dj_rest_auth.registration',
     'corsheaders',
     
-   
     'profiles', 
     'django_filters',
 
