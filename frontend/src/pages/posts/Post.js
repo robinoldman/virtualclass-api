@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
+import { PostEditForm } from "../../pages/posts/PostEditForm";
 
 const Post = (props) => {
   const {
