@@ -10,14 +10,21 @@ import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
-import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { axiosReq } from "../../api/axiosDefaults";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
+  const { id } = UseParams();
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [{ data: pageProfile }] = await Promise.all([]);
+        axiosReq.get(`/profiles/${id}/`);
+      } catch (err) {}
+    };
     setHasLoaded(true);
   }, []);
 
@@ -50,7 +57,6 @@ function ProfilePage() {
   return (
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <PopularProfiles mobile />
         <Container className={appStyles.Content}>
           {hasLoaded ? (
             <>
@@ -62,9 +68,7 @@ function ProfilePage() {
           )}
         </Container>
       </Col>
-      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        <PopularProfiles />
-      </Col>
+      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2"></Col>
     </Row>
   );
 }
