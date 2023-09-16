@@ -18,7 +18,7 @@ import dj_database_url
 if os.path.exists('env.py'):
     import env
 
-CLOUDINARY_STORAGE = { 
+CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 
 }
@@ -62,7 +62,7 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = 'DEV' in os.environ
+# DEBUG = 'DEV' in os.environ
 
 DEBUG = True
 
@@ -74,7 +74,7 @@ ALLOWED_HOSTS = [
 
 CORS_ALLOWED_ORIGINS = [
     os.environ.get('CLIENT_ORIGIN')
-    ]
+]
 
 
 # Application definition
@@ -98,11 +98,11 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount', 
+    'allauth.socialaccount',
     'corsheaders',
     'dj_rest_auth.registration',
-   
-    'profiles', 
+
+    'profiles',
     'django_filters',
 
 ]
@@ -121,6 +121,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 
@@ -151,16 +152,15 @@ WSGI_APPLICATION = 'virtualclas.wsgi.application'
 
 if 'DEV' in os.environ:
     DATABASES = {
-         'default': {
-             'ENGINE': 'django.db.backends.sqlite3',
-             'NAME': BASE_DIR / 'db.sqlite3',
-         }
-     }
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 else:
     DATABASES = {
-         'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-     }
-   
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
 
 
 # Password validation
@@ -202,7 +202,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 WHITENOISE_ROOT = BASE_DIR / 'staticfiles' / 'build'
-
 
 
 # Default primary key field type
