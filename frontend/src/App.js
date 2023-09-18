@@ -7,7 +7,7 @@ import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
-import LessonsPage from "./pages/lessons/lessons";
+import LessonsPage from "./pages/lessons/LessonsPage";
 import AssignmentsPage from "./pages/assignments/assignments";
 import PostsPage from "./pages/posts/PostsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";

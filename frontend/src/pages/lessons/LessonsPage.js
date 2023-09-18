@@ -8,17 +8,18 @@ import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
 import Comment from "../comments/Comment";
+import Lessons from "./Lessons";
 
 function LessonPage() {
   const { id } = useParams();
-  const [lesson, setLesson] = useState(null);
+  const [lesson, setLesson] = useState({ results: [] });
 
   useEffect(() => {
     const fetchLesson = async () => {
       try {
         const response = await axios.get(`/lessons/${id}`);
         const lessonData = response.data;
-        setLesson(lessonData);
+        setLesson({ ...lessonData, results: lessonData.results || [] });
         console.log(lessonData);
       } catch (err) {
         console.error(err);
@@ -35,6 +36,7 @@ function LessonPage() {
           <>
             <h1>{lesson.title}</h1>
             <p>{lesson.description}</p>
+            <Lessons {...lesson.results[0]} />
           </>
         ) : (
           <p>Loading lesson...</p>
