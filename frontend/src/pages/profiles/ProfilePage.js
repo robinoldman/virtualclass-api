@@ -24,7 +24,7 @@ function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
   const { id } = useParams();
-  const setProfileData = useSetProfileData;
+  const setProfileData = useSetProfileData();
   const { pageProfile } = useProfileData();
   const [profile] = pageProfile.results;
 
