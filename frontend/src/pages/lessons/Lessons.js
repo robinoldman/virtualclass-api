@@ -12,7 +12,9 @@ const Lessons = (props) => {
     id,
     owner,
     profile_id,
-    profile_image,
+    difficulty_level,
+    course,
+
     comments_count,
     likes_count,
     like_id,
@@ -20,26 +22,37 @@ const Lessons = (props) => {
     content,
     image,
     updated_at,
+    lessonsPage,
     postPage,
     setPosts,
   } = props;
 
+  // Add console.log statements to check the values
+
   const currentUser = useCurrentUser();
+
   const is_owner = currentUser?.username === owner;
+  const profile_image = currentUser?.profile_image;
+
   const history = useHistory();
 
+  console.log("profile_image:", profile_image);
+  console.log("owner:", owner);
+
   const handleEdit = () => {
-    history.push(`/posts/${id}/edit`);
+    history.push(`/lessons/${id}/edit`);
   };
 
   const handleDelete = async () => {
     try {
-      await axiosRes.delete(`/posts/${id}/`);
+      await axiosRes.delete(`/lessons/${id}/`);
       history.goBack();
     } catch (err) {
       console.log(err);
     }
   };
+
+  // ... rest of your component code
 
   return (
     <Card className={styles.Post}>
@@ -52,16 +65,18 @@ const Lessons = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && postPage}
+            {is_owner && lessonsPage}
           </div>
         </Media>
       </Card.Body>
-      <Link to={`/posts/${id}`}>
+      <Link to={`/lessons/${id}`}>
         <Card.Img src={image} alt={title} />
       </Link>
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
+        {content && <Card.Text>{difficulty_level}</Card.Text>}
+        {content && <Card.Text>{course}</Card.Text>}
       </Card.Body>
     </Card>
   );
