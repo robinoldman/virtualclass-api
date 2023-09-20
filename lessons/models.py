@@ -22,7 +22,7 @@ class Lessons(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='lesson_images/', blank=True, null=True)
-    video_url = models.URLField(blank=True, null=True)
+   
     course = models.CharField(
         max_length=20, choices=LESSON_CHOICES, default='Maths'
     )

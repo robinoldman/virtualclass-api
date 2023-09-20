@@ -46,7 +46,7 @@ const Lessons = (props) => {
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/lessons/${id}/`);
-      history.goBack();
+      history.push("/lessons");
     } catch (err) {
       console.log(err);
     }
@@ -65,7 +65,12 @@ const Lessons = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && lessonsPage}
+            {is_owner && lessonsPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </Media>
       </Card.Body>

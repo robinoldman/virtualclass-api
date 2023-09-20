@@ -14,6 +14,7 @@ import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PostEditForm from "./pages/posts/PostEditForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import AllLessonsPage from "./pages/lessons/AllLessons";
+import LessonsEditForm from "./pages/lessons/LessonsEditForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -50,6 +51,11 @@ function App() {
                 filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
               />
             )}
+          />
+          <Route
+            exact
+            path="/lessons/:id/edit"
+            render={() => <LessonsEditForm />}
           />
           <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
           <Route exact path="/signin" render={() => <SignInForm />} />

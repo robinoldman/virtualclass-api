@@ -11,6 +11,21 @@ from .models import Lessons
 class LessonList(ListAPIView):
     queryset = Lessons.objects.all()
     serializer_class = LessonsSerializer
+    queryset = Lessons.objects.annotate(
+
+    ).order_by('-created_at')
+    filter_backends = [
+        filters.OrderingFilter,
+        filters.SearchFilter,
+    ]
+    search_fields = [
+        'owner__username',
+        'title',
+        'course',
+        'difficulty_level',
+
+    ]
+
 
     def get_serializer_context(self):
         # Pass the request object to the serializer context
