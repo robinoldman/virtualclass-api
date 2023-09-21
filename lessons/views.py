@@ -8,9 +8,10 @@ from virtualclas.permissions import IsOwnerOrReadOnly
 from .models import Lessons
 # Create your views here.
 
-class LessonList(ListAPIView):
+class LessonList(generics.ListCreateAPIView):
     queryset = Lessons.objects.all()
     serializer_class = LessonsSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Lessons.objects.annotate(
 
     ).order_by('-created_at')
@@ -25,6 +26,9 @@ class LessonList(ListAPIView):
         'difficulty_level',
 
     ]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
     def get_serializer_context(self):

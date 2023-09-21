@@ -15,6 +15,7 @@ import PostEditForm from "./pages/posts/PostEditForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import AllLessonsPage from "./pages/lessons/AllLessons";
 import LessonsEditForm from "./pages/lessons/LessonsEditForm";
+import LessonCreateForm from "./pages/lessons/LessonCreateForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -61,6 +62,11 @@ function App() {
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
+          <Route
+            exact
+            path="/lessons/create"
+            render={() => <LessonCreateForm />}
+          />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route exact path="/lessons/:id" render={() => <LessonsPage />} />
           <Route exact path="/lessons" render={() => <AllLessonsPage />} />
