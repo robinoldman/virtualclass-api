@@ -14,6 +14,11 @@ const Assignments = (props) => {
     profile_id,
     difficulty_level,
     course,
+    estimated_time,
+
+    due_date,
+    attachments,
+    assigned_to,
 
     comments_count,
     likes_count,
@@ -80,8 +85,9 @@ const Assignments = (props) => {
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
-        {content && <Card.Text>{difficulty_level}</Card.Text>}
-        {content && <Card.Text>{course}</Card.Text>}
+        {content && <Card.Text>{due_date}</Card.Text>}
+        {content && <Card.Text>{attachments}</Card.Text>}
+        {content && <Card.Text>{assigned_to}</Card.Text>}
       </Card.Body>
     </Card>
   );
