@@ -22,8 +22,10 @@ function LessonsEditForm() {
     title: "",
     content: "",
     image: "",
+    difficulty_level: "",
+    course: "",
   });
-  const { title, content, image } = LessonData;
+  const { title, content, image, course, difficulty_level } = LessonData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -33,9 +35,12 @@ function LessonsEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/lessons/${id}/`);
-        const { title, content, image, is_owner } = data;
+        const { title, content, image, is_owner, course, difficulty_level } =
+          data;
 
-        is_owner ? setLessonData({ title, content, image }) : history.push("/");
+        is_owner
+          ? setLessonData({ title, content, image, course, difficulty_level })
+          : history.push("/");
       } catch (err) {
         console.log(err);
       }
@@ -67,6 +72,8 @@ function LessonsEditForm() {
 
     formData.append("title", title);
     formData.append("content", content);
+    formData.append("course", course);
+    formData.append("difficulty_level", difficulty_level);
 
     if (imageInput?.current?.files[0]) {
       formData.append("image", imageInput.current.files[0]);
@@ -111,6 +118,44 @@ function LessonsEditForm() {
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>difficulty level</Form.Label>
+        <Form.Control
+          as="select"
+          name="difficulty_level"
+          value={difficulty_level}
+          onChange={handleChange}
+        >
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </Form.Control>
+      </Form.Group>
+      {errors?.difficulty_level?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>Course</Form.Label>
+        <Form.Control
+          as="select"
+          name="course"
+          value={course}
+          onChange={handleChange}
+        >
+          <option value="Maths">Maths</option>
+          <option value="Science">Science</option>
+          <option value="History">History</option>
+        </Form.Control>
+      </Form.Group>
+      {errors?.course?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
