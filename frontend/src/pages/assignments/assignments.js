@@ -1,26 +1,89 @@
 import React from "react";
+import styles from "../../styles/Post.module.css";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
+import Avatar from "../../components/Avatar";
+import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
+const Assignments = (props) => {
+  const {
+    id,
+    owner,
+    profile_id,
+    difficulty_level,
+    course,
 
-import appStyles from "../../App.module.css";
+    comments_count,
+    likes_count,
+    like_id,
+    title,
+    content,
+    image,
+    updated_at,
+    lessonsPage,
+    postPage,
+    setPosts,
+  } = props;
 
-function AssignmentsPage() {
-  // Add your logic here
+  // Add console.log statements to check the values
+
+  const currentUser = useCurrentUser();
+
+  const is_owner = currentUser?.username === owner;
+  const profile_image = currentUser?.profile_image;
+
+  const history = useHistory();
+
+  console.log("profile_image:", profile_image);
+  console.log("owner:", owner);
+
+  const handleEdit = () => {
+    history.push(`/assignments/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/assignments/${id}/`);
+      history.push("/assignments");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // ... rest of your component code
 
   return (
-    <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles for mobile</p>
-        <p>Post component</p>
-        <Container className={appStyles.Content}>Comments</Container>
-      </Col>
-      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        Popular profiles for desktop
-      </Col>
-    </Row>
+    <Card className={styles.Post}>
+      <Card.Body>
+        <Media className="align-items-center justify-content-between">
+          <Link to={`/profiles/${profile_id}`}>
+            <Avatar src={profile_image} height={55} />
+            <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />
+            {owner}
+          </Link>
+          <div className="d-flex align-items-center">
+            <span>{updated_at}</span>
+            {is_owner && AssignmnetsssignmentsPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
+          </div>
+        </Media>
+      </Card.Body>
+      <Link to={`/assignments/${id}`}>
+        <Card.Img src={image} alt={title} />
+      </Link>
+      <Card.Body>
+        {title && <Card.Title className="text-center">{title}</Card.Title>}
+        {content && <Card.Text>{content}</Card.Text>}
+        {content && <Card.Text>{difficulty_level}</Card.Text>}
+        {content && <Card.Text>{course}</Card.Text>}
+      </Card.Body>
+    </Card>
   );
-}
-
-export default AssignmentsPage;
+};
+export default Assignments;
