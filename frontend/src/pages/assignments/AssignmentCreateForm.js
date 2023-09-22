@@ -18,22 +18,22 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 //import PopularProfiles from "../profiles/PopularProfiles";
 
-function LessonCreateForm() {
+function AssignmentCreateForm() {
   const [errors, setErrors] = useState({});
 
-  const [LessonData, setLessonData] = useState({
+  const [AssignmentData, setAssignmentData] = useState({
     title: "",
     content: "",
     image: "",
   });
-  const { title, content, image } = LessonData;
+  const { title, content, image } = AssignmentData;
 
   const imageInput = useRef(null);
   const history = useHistory();
 
   const handleChange = (event) => {
-    setLessonData({
-      ...LessonData,
+    setAssignmentData({
+      ...AssignmentData,
       [event.target.name]: event.target.value,
     });
   };
@@ -41,8 +41,8 @@ function LessonCreateForm() {
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
-      setLessonData({
-        ...LessonData,
+      setAssignmentData({
+        ...AssignmentData,
         image: URL.createObjectURL(event.target.files[0]),
       });
     }
@@ -57,8 +57,8 @@ function LessonCreateForm() {
     formData.append("image", imageInput.current.files[0]);
 
     try {
-      const { data } = await axiosReq.post("/lessons/", formData);
-      history.push(`/lessons/${data.id}`);
+      const { data } = await axiosReq.post("/assignments/", formData);
+      history.push(`/assignments/${data.id}`);
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
@@ -170,4 +170,4 @@ function LessonCreateForm() {
   );
 }
 
-export default LessonCreateForm;
+export default AssignmentCreateForm;
