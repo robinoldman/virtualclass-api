@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers 
 from assignments.models import Assignment
 
@@ -13,9 +14,11 @@ class AssignmentSerializer(serializers.ModelSerializer):
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
+        if request and request.user:
+            return obj.owner == request.user
+        return False
 
     class Meta:
         model = Assignment
-        fields = ['id', 'owner', 'created_at', 'updated_at', 'title', 
-        'description', 'due_date', 'attachments']
+        fields = '__all__' 
 

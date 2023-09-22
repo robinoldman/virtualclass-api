@@ -70,7 +70,7 @@ const Assignments = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && AssignmnetsssignmentsPage && (
+            {is_owner && Assignments && (
               <MoreDropdown
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}

@@ -16,6 +16,7 @@ import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
+
 //import PopularProfiles from "../profiles/PopularProfiles";
 
 function AssignmentCreateForm() {
@@ -25,6 +26,10 @@ function AssignmentCreateForm() {
     title: "",
     content: "",
     image: "",
+    due_date: "",
+    attachments: "",
+    assigned: "",
+    description: "",
   });
   const { title, content, image } = AssignmentData;
 
@@ -61,6 +66,7 @@ function AssignmentCreateForm() {
       history.push(`/assignments/${data.id}`);
     } catch (err) {
       console.log(err);
+      console.log(err.response);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
@@ -91,6 +97,54 @@ function AssignmentCreateForm() {
           rows={6}
           name="content"
           value={content}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>assigned to</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={6}
+          name="assig"
+          value={content}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>Content</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={6}
+          name="content"
+          value={content}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>description</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={6}
+          name="description"
+          value={description}
           onChange={handleChange}
         />
       </Form.Group>

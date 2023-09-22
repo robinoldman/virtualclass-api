@@ -16,7 +16,7 @@ import ProfilePage from "./pages/profiles/ProfilePage";
 import AllLessonsPage from "./pages/lessons/AllLessons";
 import LessonsEditForm from "./pages/lessons/LessonsEditForm";
 import LessonCreateForm from "./pages/lessons/LessonCreateForm";
-import AssignmentCreateForm from "./pages/assignments/AssignmentCreateForm";
+import AssignmentCreateForm from "./pages/assignments/AssignmentCreateForm.js";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -78,7 +78,7 @@ function App() {
           <Route exact path="/lessons" render={() => <AllLessonsPage />} />
           <Route
             exact
-            path="/assignments/:id"
+            path="/assignments/"
             render={() => <AssignmentsPage />}
           />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
