@@ -9,6 +9,13 @@ LESSON_CHOICES = [
     
 ]
 
+CLASS = [
+    ('Barry', 'Barry'),
+    ('John', 'Sarah'),
+    ('Rachel', 'Rachel'),
+    ('Sue', 'Sue'),
+]
+
 
 class Assignment(models.Model):
     """
@@ -30,8 +37,9 @@ class Assignment(models.Model):
         help_text='Estimated time for the lesson (in hours:minutes:seconds)'
     )
     due_date = models.DateTimeField()
-    attachments = models.FileField(upload_to='assignments/')
-    assigned_to = models.ManyToManyField(Profile, related_name='assignments')
+   
+    assigned = models.CharField(
+        max_length=20, choices=CLASS, default='Sue')
    
    
 

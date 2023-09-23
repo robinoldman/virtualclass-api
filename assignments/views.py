@@ -8,6 +8,11 @@ from virtualclas.permissions import IsOwnerOrReadOnly
 from rest_framework.generics import ListAPIView
 from .serializers import AssignmentSerializer
 from django.db.models import Count
+from profiles.models import Profile 
+from django.http import JsonResponse
+from django.views import View
+
+
 
 class AssignmentList(generics.ListCreateAPIView):
     queryset = Assignment.objects.all()

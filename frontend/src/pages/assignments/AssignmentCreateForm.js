@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -21,25 +21,36 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 function AssignmentCreateForm() {
   const [errors, setErrors] = useState({});
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
 
   const [AssignmentData, setAssignmentData] = useState({
     title: "",
     content: "",
     image: "",
     due_date: "",
-    attachments: "",
+
     assigned: "",
     description: "",
   });
-  const { title, content, image } = AssignmentData;
+  const {
+    title,
+    content,
+    image,
+    due_date,
+    description,
+    estimated_time,
+    assigned,
+  } = AssignmentData;
 
   const imageInput = useRef(null);
   const history = useHistory();
 
   const handleChange = (event) => {
+    const { name, value } = event.target;
     setAssignmentData({
       ...AssignmentData,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
   };
 
@@ -60,6 +71,11 @@ function AssignmentCreateForm() {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
+    formData.append("description", description);
+
+    formData.append("estimated_time", estimated_time);
+    formData.append("due_date", due_date);
+    formData.append("assigned", assigned);
 
     try {
       const { data } = await axiosReq.post("/assignments/", formData);
@@ -89,6 +105,41 @@ function AssignmentCreateForm() {
           {message}
         </Alert>
       ))}
+      <Form.Group>
+        <Form.Label>Content</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={6}
+          name="content"
+          value={content}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>assign to</Form.Label>
+        <Form.Control
+          as="select"
+          name="assigned"
+          value={assigned}
+          onChange={handleChange}
+        >
+          <option value="Sue">Sue</option>
+          <option value="Rachel">Rachel</option>
+          <option value="Barry">Barry</option>
+          <option value="John">John</option>
+        </Form.Control>
+      </Form.Group>
+      {errors?.difficulty_level?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Form.Group>
         <Form.Label>Content</Form.Label>
@@ -107,32 +158,30 @@ function AssignmentCreateForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>assigned to</Form.Label>
+        <Form.Label>Estimated Time (HH:MM:SS)</Form.Label>
         <Form.Control
-          as="textarea"
-          rows={6}
-          name="assig"
-          value={content}
+          type="time"
+          name="estimated_time"
+          value={estimated_time}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.content?.map((message, idx) => (
+      {errors?.estimated_time?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
 
       <Form.Group>
-        <Form.Label>Content</Form.Label>
+        <Form.Label>Due Date</Form.Label>
         <Form.Control
-          as="textarea"
-          rows={6}
-          name="content"
-          value={content}
+          type="datetime-local" // You can use a suitable input type for datetime
+          name="due_date"
+          value={due_date}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.content?.map((message, idx) => (
+      {errors?.due_date?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -153,7 +202,6 @@ function AssignmentCreateForm() {
           {message}
         </Alert>
       ))}
-
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
