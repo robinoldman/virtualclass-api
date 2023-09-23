@@ -8,6 +8,7 @@ import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
 import { PostEditForm } from "../../pages/posts/PostEditForm";
 
+/* Component to display a post. */
 const Post = (props) => {
   const {
     id,
@@ -29,10 +30,17 @@ const Post = (props) => {
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
 
+  /**
+   * Event handler for editing the post.
+   */
+
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
   };
 
+  /**
+   * Event handler for deleting the post.
+   */
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/posts/${id}/`);
@@ -42,6 +50,9 @@ const Post = (props) => {
     }
   };
 
+  /**
+   * Event handler for liking the post not funcional.
+   */
   const handleLike = async () => {
     try {
       const { data } = await axiosRes.post("/likes/", { post: id });
@@ -58,6 +69,9 @@ const Post = (props) => {
     }
   };
 
+  /**
+   * Event handler for unliking the post. not functional
+   */
   const handleUnlike = async () => {
     try {
       await axiosRes.delete(`/likes/${like_id}/`);
@@ -79,23 +93,30 @@ const Post = (props) => {
       <Card.Body>
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${profile_id}`}>
+            {/* Display the profile's avatar */}
             <Avatar src={profile_image} height={55} />
             <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />
+            {/* Display the owner's username */}
             {owner}
           </Link>
           <div className="d-flex align-items-center">
+            {/* Display the post's last updated timestamp */}
             <span>{updated_at}</span>
             {is_owner && postPage}
           </div>
         </Media>
       </Card.Body>
       <Link to={`/posts/${id}`}>
+        {/* Display the post's image with a link to its detail page */}
         <Card.Img src={image} alt={title} />
       </Link>
       <Card.Body>
+        {/* Display the post's title (if available) */}
         {title && <Card.Title className="text-center">{title}</Card.Title>}
+        {/* Display the post's content (if available) */}
         {content && <Card.Text>{content}</Card.Text>}
         <div className={styles.PostBar}>
+          {/* Display like/unlike button and count */}
           {is_owner ? (
             <OverlayTrigger
               placement="top"
@@ -120,6 +141,7 @@ const Post = (props) => {
             </OverlayTrigger>
           )}
           {likes_count}
+          {/* Link to the post's detail page with comment count */}
           <Link to={`/posts/${id}`}>
             <i className="far fa-comments" />
           </Link>
