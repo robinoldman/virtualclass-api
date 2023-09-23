@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import axios from "axios"; // Import Axios or your preferred HTTP library
+import axios from "axios";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -11,17 +11,24 @@ import appStyles from "../../App.module.css";
 import Comment from "../comments/Comment";
 import Lessons from "./Lessons";
 
+/**
+ * Component for rendering a single lesson page.
+ */
 function LessonPage() {
+  // Get the lesson ID from the route parameters
   const { id } = useParams();
-
+  // Get the current user data from the context
   const currentUser = useCurrentUser();
   const profile_image = currentUser?.profile_image;
   const difficulty_level = currentUser?.difficulty_level;
+  // State to hold the lesson data
   const [lesson, setLesson] = useState({ results: [] });
 
   useEffect(() => {
+    // Fetch lesson data when the component mounts
     const fetchLesson = async () => {
       try {
+        // Send a request to retrieve lesson data
         const response = await axios.get(`/lessons/`);
         const lessonData = response.data;
         setLesson(lessonData);
@@ -32,31 +39,20 @@ function LessonPage() {
       }
     };
     // const fetchLesson = async () => {
-    //   try {
-    //     const response = await axios.get(`/lessons/${id}`);
-    //     const lessonData = response.data;
-    //     setLesson({ ...lessonData, results: lessonData.results || [] });
-    //     console.log("lessonData on LessonsPage: ", lessonData);
-    //     console.log(lesson);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // };
 
     fetchLesson();
   }, []);
-  // }, [id]);
 
+  // Call the fetchLesson function
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         {lesson.results.length ? (
-          // {lesson ? (
           <>
+            {/* Render lesson title and content */}
             <h1>{lesson.results[0].title}</h1>
             <p>{lesson.results[0].content}</p>
-            {/* <h1>{lesson.title}</h1>
-            <p>{lesson.description}</p> */}
+            {/* Render child component Lessons with lesson data */}
             {<Lessons {...lesson.results[0]} />}
           </>
         ) : (
