@@ -18,20 +18,29 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 //import PopularProfiles from "../profiles/PopularProfiles";
 
+/**
+ * Represents a form for creating a new lesson.
+ */
+
 function LessonCreateForm() {
+  // State for storing form errors
   const [errors, setErrors] = useState({});
 
+  // State for lesson data
   const [LessonData, setLessonData] = useState({
     title: "",
     content: "",
     image: "",
   });
   const { title, content, image } = LessonData;
-
+  // Ref for file input
   const imageInput = useRef(null);
+
+  // Access to the router history
   const history = useHistory();
 
   const handleChange = (event) => {
+    // Update LessonData with form field values
     setLessonData({
       ...LessonData,
       [event.target.name]: event.target.value,
@@ -40,7 +49,9 @@ function LessonCreateForm() {
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
+      // Revoke the previous object URL to prevent memory leaks
       URL.revokeObjectURL(image);
+      // Update LessonData with the newly selected image
       setLessonData({
         ...LessonData,
         image: URL.createObjectURL(event.target.files[0]),
@@ -57,16 +68,20 @@ function LessonCreateForm() {
     formData.append("image", imageInput.current.files[0]);
 
     try {
+      // Send a POST request to create a new lesson
       const { data } = await axiosReq.post("/lessons/", formData);
+      // Redirect to the newly created lesson
       history.push(`/lessons/${data.id}`);
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
+        // Set errors if there are any
         setErrors(err.response?.data);
       }
     }
   };
 
+  // JSX for the form fields
   const textFields = (
     <div className="text-center">
       <Form.Group>
@@ -100,6 +115,7 @@ function LessonCreateForm() {
         </Alert>
       ))}
 
+      {/* 'Cancel' and 'Create' buttons */}
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
@@ -146,6 +162,7 @@ function LessonCreateForm() {
                 </Form.Label>
               )}
 
+              {/* File input for image upload */}
               <Form.File
                 id="image-upload"
                 accept="image/*"
@@ -158,11 +175,12 @@ function LessonCreateForm() {
                 {message}
               </Alert>
             ))}
-
+            {/* Render the textFields component for smaller screens */}
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
+          {/* Render the textFields component for larger screens */}
           <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
