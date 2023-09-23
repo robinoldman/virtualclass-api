@@ -20,6 +20,10 @@ import {
 } from "../../contexts/ProfileDataContext";
 import { Button, Image } from "react-bootstrap";
 
+/**
+ * Component for rendering a user's profile page.
+ */
+
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
@@ -29,21 +33,25 @@ function ProfilePage() {
   const [profile] = pageProfile.results;
 
   useEffect(() => {
+    // Fetch profile data for the specified user id
     const fetchData = async () => {
       try {
         const [{ data: pageProfile }] = await Promise.all([
           axiosReq.get(`/profiles/${id}/`),
         ]);
+        // Update the profile data in the context
         setProfileData((prevState) => ({
           ...prevState,
           pageProfile: { results: [pageProfile] },
         }));
+        // Set the hasLoaded flag to true
         setHasLoaded(true);
       } catch (err) {}
     };
     fetchData();
   }, [id, setProfileData]);
 
+  // JSX for rendering the main user profile
   const mainProfile = (
     <>
       <Row noGutters className="px-3 text-center">
@@ -66,6 +74,8 @@ function ProfilePage() {
     </>
   );
 
+  // JSX for rendering user's posts on the profile page
+
   const mainProfilePosts = (
     <>
       <hr />
@@ -78,6 +88,7 @@ function ProfilePage() {
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <Container className={appStyles.Content}>
+          {/* Render content when data has loaded */}
           {hasLoaded ? (
             <>
               {mainProfile}
