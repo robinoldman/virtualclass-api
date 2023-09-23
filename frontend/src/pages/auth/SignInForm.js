@@ -16,22 +16,30 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
+/**
+ * Component for rendering a sign-in form.
+ */
 function SignInForm() {
+  // Get the function to set the current user from the context
   const setCurrentUser = useSetCurrentUser();
 
+  // State to hold the sign-in form data
   const [signInData, setSignInData] = useState({
     username: "",
     password: "",
   });
   const { username, password } = signInData;
 
+  // State to store errors
   const [errors, setErrors] = useState({});
-
+  // Get the history object to navigate after sign-in
   const history = useHistory();
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
+      // Send a POST request to the server to sign in
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       history.push("/");
@@ -40,6 +48,7 @@ function SignInForm() {
     }
   };
 
+  // Handle input field changes
   const handleChange = (event) => {
     setSignInData({
       ...signInData,
@@ -53,6 +62,7 @@ function SignInForm() {
         <Container className={`${appStyles.Content} p-4 `}>
           <h1 className={styles.Header}>sign in</h1>
           <Form onSubmit={handleSubmit}>
+            {/* Username Input Field */}
             <Form.Group controlId="username">
               <Form.Label className="d-none">Username</Form.Label>
               <Form.Control
@@ -64,12 +74,14 @@ function SignInForm() {
                 onChange={handleChange}
               />
             </Form.Group>
+            {/* Display username errors if any */}
             {errors.username?.map((message, idx) => (
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
             ))}
 
+            {/* Password Input Field */}
             <Form.Group controlId="password">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
@@ -81,17 +93,20 @@ function SignInForm() {
                 onChange={handleChange}
               />
             </Form.Group>
+            {/* Display password errors if any */}
             {errors.password?.map((message, idx) => (
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
             ))}
+            {/* Sign In Button */}
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
               type="submit"
             >
               Sign in
             </Button>
+            {/* Display non-field errors if any */}
             {errors.non_field_errors?.map((message, idx) => (
               <Alert key={idx} variant="warning" className="mt-3">
                 {message}
@@ -99,12 +114,15 @@ function SignInForm() {
             ))}
           </Form>
         </Container>
+        {/* Sign Up Link */}
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signup">
             Don't have an account? <span>Sign up now!</span>
           </Link>
         </Container>
       </Col>
+
+      {/* Image Column */}
       <Col
         md={6}
         className={`my-auto d-none d-md-block p-2 ${styles.SignInCol}`}
