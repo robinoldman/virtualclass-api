@@ -64,7 +64,7 @@ function AllAssignmentsPage({ message, filter = "" }) {
             {assignments.results.length ? (
               <InfiniteScroll
                 children={assignments.results.map((assignment) => (
-                  <assignment
+                  <Assignments
                     key={assignment.id}
                     {...assignment}
                     setAssignments={setAssignments}
