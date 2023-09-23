@@ -17,12 +17,22 @@ import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 
+/**
+ * Component for rendering a page that displays a list of posts.
+ *
+ * @param {string} message - Message to display when there are no posts.
+ * @param {string} filter - Filter for fetching specific posts (optional).
+ */
+
 function PostsPage({ message, filter = "" }) {
+  // State variables to store posts data and loading status
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
+  // Get the current pathname using react-router's useLocation
   const { pathname } = useLocation();
 
   useEffect(() => {
+    // Function to fetch posts based on the filter
     const fetchPosts = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/?${filter}`);
@@ -33,6 +43,7 @@ function PostsPage({ message, filter = "" }) {
       }
     };
 
+    // Set loading status to false and fetch posts when the component mounts
     setHasLoaded(false);
     fetchPosts();
   }, [filter, pathname]);
@@ -44,6 +55,7 @@ function PostsPage({ message, filter = "" }) {
         {hasLoaded ? (
           <>
             {posts.results.length ? (
+              // Render an InfiniteScroll component for posts
               <InfiniteScroll
                 children={posts.results.map((post) => (
                   <Post key={post.id} {...post} setPosts={setPosts} />
@@ -54,12 +66,14 @@ function PostsPage({ message, filter = "" }) {
                 next={() => {}}
               />
             ) : (
+              // Display a message with an image when there are no posts
               <Container className={appStyles.Content}>
                 <Asset src={NoResults} message={message} />
               </Container>
             )}
           </>
         ) : (
+          // Display a spinner while loading posts
           <Container className={appStyles.Content}>
             <Asset spinner />
           </Container>
