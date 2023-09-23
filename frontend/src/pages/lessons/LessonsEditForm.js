@@ -15,9 +15,13 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 
+/**
+ * Represents a component for editing a lesson.
+ */
+
 function LessonsEditForm() {
   const [errors, setErrors] = useState({});
-
+  // State to manage lesson data
   const [LessonData, setLessonData] = useState({
     title: "",
     content: "",
@@ -32,6 +36,9 @@ function LessonsEditForm() {
   const { id } = useParams();
 
   useEffect(() => {
+    /**
+     * Fetch lesson data when the component mounts.
+     */
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/lessons/${id}/`);
@@ -50,6 +57,7 @@ function LessonsEditForm() {
   }, [history, id]);
 
   const handleChange = (event) => {
+    // Update the lesson data state when form inputs change
     setLessonData({
       ...LessonData,
       [event.target.name]: event.target.value,
@@ -57,6 +65,7 @@ function LessonsEditForm() {
   };
 
   const handleChangeImage = (event) => {
+    // Revoke the previous image URL and set a new one when a new image is selected
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
       setLessonData({
@@ -80,16 +89,23 @@ function LessonsEditForm() {
     }
 
     try {
+      // Send a PUT request to update the lesson data
       await axiosReq.put(`/lessons/${id}/`, formData);
       history.push(`/lessons/${id}`);
+      // Redirect to the lesson page after successful update
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
+        // Set form errors if the request is not unauthorized
         setErrors(err.response?.data);
       }
     }
   };
 
+  // JSX for form fields
+  {
+    /* Title input */
+  }
   const textFields = (
     <div className="text-center">
       <Form.Group>
@@ -101,12 +117,14 @@ function LessonsEditForm() {
           onChange={handleChange}
         />
       </Form.Group>
+      {/* Display title errors */}
       {errors?.title?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
 
+      {/* Content textarea */}
       <Form.Group>
         <Form.Label>Content</Form.Label>
         <Form.Control
@@ -116,6 +134,7 @@ function LessonsEditForm() {
           value={content}
           onChange={handleChange}
         />
+        {/* Display content errors */}
       </Form.Group>
       {errors?.content?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -124,6 +143,7 @@ function LessonsEditForm() {
       ))}
 
       <Form.Group>
+        {/* Difficulty level select */}
         <Form.Label>difficulty level</Form.Label>
         <Form.Control
           as="select"
@@ -136,6 +156,7 @@ function LessonsEditForm() {
           <option value="Hard">Hard</option>
         </Form.Control>
       </Form.Group>
+      {/* Display difficulty level errors */}
       {errors?.difficulty_level?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
@@ -143,6 +164,7 @@ function LessonsEditForm() {
       ))}
 
       <Form.Group>
+        {/* Course select */}
         <Form.Label>Course</Form.Label>
         <Form.Control
           as="select"
@@ -160,7 +182,7 @@ function LessonsEditForm() {
           {message}
         </Alert>
       ))}
-
+      {/* Cancel and Save buttons */}
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.push("/lessons")}
@@ -181,6 +203,7 @@ function LessonsEditForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
+              {/* Display the lesson's image */}
               <figure>
                 <Image className={appStyles.Image} src={image} rounded />
               </figure>
@@ -193,6 +216,7 @@ function LessonsEditForm() {
                 </Form.Label>
               </div>
 
+              {/* Input for changing the lesson's image */}
               <Form.File
                 id="image-upload"
                 accept="image/*"
@@ -200,12 +224,14 @@ function LessonsEditForm() {
                 ref={imageInput}
               />
             </Form.Group>
+            {/* Display image errors */}
             {errors?.image?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
 
+            {/* Display textFields on mobile */}
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
