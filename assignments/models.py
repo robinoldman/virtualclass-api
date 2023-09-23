@@ -28,6 +28,7 @@ class Assignment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
+    image = models.ImageField(upload_to='lesson_images/', blank=True, null=True)
     course = models.CharField(
         max_length=20, choices=LESSON_CHOICES, default='Maths'
     )

@@ -17,13 +17,22 @@ import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 
+/**
+ * Represents a page that displays a list of lessons.
+ * @param {string} message - A message to display.
+ * @param {string} filter - A filter for the lessons.
+ */
+
 function AllLessonsPage({ message, filter = "" }) {
+  // State for storing lessons and loading status
   const [lessons, setLessons] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
 
+  // State for the search query
   const [query, setQuery] = useState("");
 
+  // Fetch lessons when component mounts or when filter or query changes
   useEffect(() => {
     const fetchLessons = async () => {
       try {
@@ -37,6 +46,7 @@ function AllLessonsPage({ message, filter = "" }) {
       }
     };
 
+    // Reset loading status and fetch lessons
     setHasLoaded(false);
     fetchLessons();
   }, [filter, query, pathname]);
@@ -62,6 +72,7 @@ function AllLessonsPage({ message, filter = "" }) {
         {hasLoaded ? (
           <>
             {lessons.results.length ? (
+              // Render lessons using InfiniteScroll
               <InfiniteScroll
                 children={lessons.results.map((lesson) => (
                   <Lesson key={lesson.id} {...lesson} setLessons={setLessons} />
@@ -72,12 +83,14 @@ function AllLessonsPage({ message, filter = "" }) {
                 next={() => {}}
               />
             ) : (
+              // Render a message when there are no lessons
               <Container className={appStyles.Content}>
                 <Asset src={NoResults} message={message} />
               </Container>
             )}
           </>
         ) : (
+          // Render a loading spinner while data is being fetched
           <Container className={appStyles.Content}>
             <Asset spinner />
           </Container>
