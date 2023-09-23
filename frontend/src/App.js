@@ -8,7 +8,7 @@ import SignInForm from "./pages/auth/SignInForm";
 import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
 import LessonsPage from "./pages/lessons/LessonsPage";
-import AssignmentsPage from "./pages/assignments/assignments";
+
 import PostsPage from "./pages/posts/PostsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PostEditForm from "./pages/posts/PostEditForm";
@@ -17,6 +17,7 @@ import AllLessonsPage from "./pages/lessons/AllLessons";
 import LessonsEditForm from "./pages/lessons/LessonsEditForm";
 import LessonCreateForm from "./pages/lessons/LessonCreateForm";
 import AssignmentCreateForm from "./pages/assignments/AssignmentCreateForm.js";
+import AssignmentsPage from "./pages/assignments/AssignmentsPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -76,6 +77,11 @@ function App() {
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route exact path="/lessons/:id" render={() => <LessonsPage />} />
           <Route exact path="/lessons" render={() => <AllLessonsPage />} />
+          <Route
+            exact
+            path="/assignments/:id"
+            render={() => <AssignmentsPage />}
+          />
           <Route
             exact
             path="/assignments/"
