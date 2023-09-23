@@ -24,7 +24,7 @@ function AssignmentPage() {
       try {
         const response = await axios.get(`/assignments/`);
         const assignmentData = response.data;
-        setLesson(assignmentData);
+        setAssignment(assignmentData);
         console.log("assignmentData on AssignmentPage: ", assignmentData);
         console.log(profile_image);
       } catch (err) {
@@ -51,13 +51,11 @@ function AssignmentPage() {
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         {assignment.results.length ? (
-          // {lesson ? (
+          // {lesson ? ('
           <>
-            <h1>{assignment.results[0].title}</h1>
-            <p>{assignment.results[0].content}</p>
             {/* <h1>{lesson.title}</h1>
             <p>{lesson.description}</p> */}
-            {<Lessons {...assignment.results[0]} />}
+            {<Assignments {...assignment.results[0]} />}
           </>
         ) : (
           <p>Loading assignment...</p>

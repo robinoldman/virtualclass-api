@@ -18,7 +18,7 @@ const Assignments = (props) => {
 
     due_date,
     attachments,
-    assigned_to,
+    assigned,
 
     comments_count,
     likes_count,
@@ -43,6 +43,7 @@ const Assignments = (props) => {
 
   console.log("profile_image:", profile_image);
   console.log("owner:", owner);
+  console.log("image:", image);
 
   const handleEdit = () => {
     history.push(`/assignments/${id}/edit`);
@@ -70,7 +71,7 @@ const Assignments = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && Assignments && (
+            {is_owner && lessonsPage && (
               <MoreDropdown
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
@@ -85,9 +86,9 @@ const Assignments = (props) => {
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
-        {content && <Card.Text>{due_date}</Card.Text>}
-        {content && <Card.Text>{attachments}</Card.Text>}
-        {content && <Card.Text>{assigned_to}</Card.Text>}
+        {due_date && <Card.Text>{due_date}</Card.Text>}
+        {estimated_time && <Card.Text>{estimated_time}</Card.Text>}
+        {assigned && <Card.Text>{assigned}</Card.Text>}
       </Card.Body>
     </Card>
   );
