@@ -24,6 +24,11 @@ const Comment = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
 
+  /**
+   * Handles the deletion of the comment.
+   * Sends a DELETE request to the server and updates the post and comment lists.
+   */
+
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/comments/${id}/`);
@@ -54,7 +59,7 @@ const Comment = (props) => {
           <span className={styles.Owner}>{owner}</span>
           <span className={styles.Date}>{updated_at}</span>
           {showEditForm ? (
-            // Pass the required props to CommentEditForm
+            // Render the CommentEditForm component when editing
             <CommentEditForm
               id={id}
               profile_id={profile_id}
@@ -67,6 +72,7 @@ const Comment = (props) => {
             <p>{content}</p>
           )}
         </Media.Body>
+        {/* Display more options for the comment if the current user is the owner */}
         {is_owner && !showEditForm && (
           <MoreDropdown
             handleEdit={() => setShowEditForm(true)}
