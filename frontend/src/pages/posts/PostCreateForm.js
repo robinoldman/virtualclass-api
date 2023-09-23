@@ -16,8 +16,10 @@ import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
-//import PopularProfiles from "../profiles/PopularProfiles";
 
+/**
+ * Component for creating a new post.
+ */
 
 function PostCreateForm() {
   const [errors, setErrors] = useState({});
@@ -32,12 +34,22 @@ function PostCreateForm() {
   const imageInput = useRef(null);
   const history = useHistory();
 
+  /**
+   * Event handler for input field changes.
+   * @param {Event} event - The input change event.
+   */
+
   const handleChange = (event) => {
     setPostData({
       ...postData,
       [event.target.name]: event.target.value,
     });
   };
+
+  /**
+   * Event handler for image file changes.
+   * @param {Event} event - The image file change event.
+   */
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
@@ -48,6 +60,11 @@ function PostCreateForm() {
       });
     }
   };
+
+  /**
+   * Event handler for form submission.
+   * @param {Event} event - The form submit event.
+   */
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -68,6 +85,7 @@ function PostCreateForm() {
     }
   };
 
+  // JSX for text fields and buttons
   const textFields = (
     <div className="text-center">
       <Form.Group>
@@ -130,7 +148,6 @@ function PostCreateForm() {
                     <Form.Label
                       className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
                       htmlFor="image-upload"
-                      
                     >
                       Change the image
                     </Form.Label>
@@ -166,7 +183,6 @@ function PostCreateForm() {
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
-         
         </Col>
       </Row>
     </Form>
