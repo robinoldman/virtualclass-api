@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
 import Assignments from "./assignments";
 import Asset from "../../components/Asset";
-
 import appStyles from "../../App.module.css";
 import styles from "../../styles/PostsPage.module.css";
 import { useLocation } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-
 import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 
+/**
+ * Represents a page displaying all assignments.
+ *
+ * @param {object} props - The props passed to the component.
+ * @param {string} props.message - A message to be displayed.
+ * @param {string} props.filter - A filter for assignments (optional).
+ */
 function AllAssignmentsPage({ message, filter = "" }) {
   const [assignments, setAssignments] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -25,6 +28,9 @@ function AllAssignmentsPage({ message, filter = "" }) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
+    /**
+     * Fetch assignments from the server.
+     */
     const fetchAssignments = async () => {
       try {
         const { data } = await axiosReq.get(
@@ -61,6 +67,7 @@ function AllAssignmentsPage({ message, filter = "" }) {
 
         {hasLoaded ? (
           <>
+            {/* Display assignments when loaded */}
             {assignments.results.length ? (
               <InfiniteScroll
                 children={assignments.results.map((assignment) => (
@@ -76,12 +83,14 @@ function AllAssignmentsPage({ message, filter = "" }) {
                 next={() => {}}
               />
             ) : (
+              // Display message when no assignments are found
               <Container className={appStyles.Content}>
                 <Asset src={NoResults} message={message} />
               </Container>
             )}
           </>
         ) : (
+          // Display a loading spinner while loading assignments
           <Container className={appStyles.Content}>
             <Asset spinner />
           </Container>
