@@ -31,8 +31,10 @@ function LessonCreateForm() {
     title: "",
     content: "",
     image: "",
+    difficulty_level: "",
+    course: "",
   });
-  const { title, content, image } = LessonData;
+  const { title, content, image, course, difficulty_level } = LessonData;
   // Ref for file input
   const imageInput = useRef(null);
 
@@ -93,12 +95,14 @@ function LessonCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+      {/* Display title errors */}
       {errors?.title?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
 
+      {/* Content textarea */}
       <Form.Group>
         <Form.Label>Content</Form.Label>
         <Form.Control
@@ -108,8 +112,50 @@ function LessonCreateForm() {
           value={content}
           onChange={handleChange}
         />
+        {/* Display content errors */}
       </Form.Group>
       {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        {/* Difficulty level select */}
+        <Form.Label>difficulty level</Form.Label>
+        <Form.Control
+          as="select"
+          name="difficulty_level"
+          value={difficulty_level}
+          onChange={handleChange}
+        >
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </Form.Control>
+      </Form.Group>
+      {/* Display difficulty level errors */}
+      {errors?.difficulty_level?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        {/* Course select */}
+        <Form.Label>Course</Form.Label>
+        <Form.Control
+          as="select"
+          name="course"
+          value={course}
+          onChange={handleChange}
+        >
+          <option value="Maths">Maths</option>
+          <option value="Science">Science</option>
+          <option value="History">History</option>
+        </Form.Control>
+      </Form.Group>
+      {errors?.course?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
