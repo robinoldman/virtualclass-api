@@ -3,8 +3,11 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
-import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
-import Avatar from './Avatar'; 
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../contexts/CurrentUserContext";
+import Avatar from "./Avatar";
 import axios from "axios";
 import useClicksOUtsideToggle from "../hooks/useClicksOUtsideToggle";
 
@@ -12,8 +15,7 @@ const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
-  const {expanded, setExpanded, ref} = useClicksOUtsideToggle();
-
+  const { expanded, setExpanded, ref } = useClicksOUtsideToggle();
 
   const handleSignOut = async () => {
     try {
@@ -24,9 +26,6 @@ const NavBar = () => {
     }
   };
 
-  
-
-
   const addPostIcon = (
     <NavLink
       className={styles.NavLink}
@@ -36,28 +35,26 @@ const NavBar = () => {
       <i className="far fa-plus-square"></i>Add post
     </NavLink>
   );
-  const loggedInIcons = <>
+  const loggedInIcons = (
+    <>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/feed"
+        to="/lessons"
       >
-        <i className="fas fa-stream"></i>feed
+        <i className="fa-solid fa-circle-plus"></i>Create Lesson
       </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/liked"
-      >
-        <i className="fas fa-heart"></i>liked
+      <NavLink className={styles.NavLink} to="/lessons/create">
+        <i className="fa-solid fa-person-chalkboard"></i>Lesson
       </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        
-        to="/"
-        onClick = { handleSignOut }
-      >
-        <i className="fas fa-sign-out-alt"></i>Sign out
+      <NavLink className={styles.NavLink} to="/assignments">
+        <i className="fa-solid fa-book"></i>Assignments
+      </NavLink>
+      <NavLink className={styles.NavLink} to="/assignments/create">
+        <i className="fa-solid fa-plus"></i>Create Assignment
+      </NavLink>
+      <NavLink className={styles.NavLink} to="/signout">
+        <i className="fas fa-sign-out-alt"></i>Sign Out
       </NavLink>
       <NavLink
         className={styles.NavLink}
@@ -65,9 +62,9 @@ const NavBar = () => {
       >
         <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
-  
-  
-  </>;
+    </>
+  );
+
   const loggedOutIcons = (
     <>
       <NavLink
@@ -88,7 +85,12 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar expanded={ expanded } className={styles.NavBar} expand="md" fixed="top">
+    <Navbar
+      expanded={expanded}
+      className={styles.NavBar}
+      expand="md"
+      fixed="top"
+    >
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
@@ -96,10 +98,11 @@ const NavBar = () => {
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
-        <Navbar.Toggle 
-        ref={ref}
-        onClick={() => setExpanded(!expanded)} 
-        aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          ref={ref}
+          onClick={() => setExpanded(!expanded)}
+          aria-controls="basic-navbar-nav"
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
             <NavLink
