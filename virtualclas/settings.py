@@ -68,6 +68,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
     'localhost',
+    '8000-robinoldman-virtualclas-3rewya0k8qk.ws-eu105.gitpod.io',
 ]
 
 
