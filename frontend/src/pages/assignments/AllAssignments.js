@@ -48,9 +48,8 @@ function AllAssignmentsPage({ message, filter = "" }) {
   }, [filter, query, pathname]);
 
   return (
-    <Row className="h-100">
+    <Row className="h-100 justify-content-center align-items-center">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles mobile</p>
         <i className={`fas fa-search ${styles.SearchIcon}`} />
         <Form
           className={styles.Searchbar}
@@ -95,9 +94,6 @@ function AllAssignmentsPage({ message, filter = "" }) {
             <Asset spinner />
           </Container>
         )}
-      </Col>
-      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <p>Popular profiles for desktop</p>
       </Col>
     </Row>
   );
