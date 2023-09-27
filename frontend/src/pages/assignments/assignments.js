@@ -84,7 +84,7 @@ const Assignments = (props) => {
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profile_image} height={55} />
             {/* Display a dropdown for edit and delete actions */}
-            <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />
+
             {/* Display the owner's username */}
             {owner}
           </Link>
@@ -107,11 +107,15 @@ const Assignments = (props) => {
       </Link>
       <Card.Body>
         {/* Display the title, content, due date, estimated time, and assigned field */}
-        {title && <Card.Title className="text-center">{title}</Card.Title>}
-        {content && <Card.Text>{content}</Card.Text>}
-        {due_date && <Card.Text>{due_date}</Card.Text>}
-        {estimated_time && <Card.Text>{estimated_time}</Card.Text>}
-        {assigned && <Card.Text>{assigned}</Card.Text>}
+        {title && (
+          <Card.Title className="text-center">Title : {title}</Card.Title>
+        )}
+        {content && <Card.Text>Content: {content}</Card.Text>}
+        {due_date && <Card.Text>Due date: {due_date}</Card.Text>}
+        {estimated_time && (
+          <Card.Text>Estimated time: {estimated_time}</Card.Text>
+        )}
+        {assigned && <Card.Text>Assigned to : {assigned}</Card.Text>}
       </Card.Body>
     </Card>
   );

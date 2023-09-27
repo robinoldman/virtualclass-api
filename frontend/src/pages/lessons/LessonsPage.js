@@ -50,8 +50,8 @@ function LessonPage() {
         {lesson.results.length ? (
           <>
             {/* Render lesson title and content */}
-            <h1>{lesson.results[0].title}</h1>
-            <p>{lesson.results[0].content}</p>
+            <h1>Lesson Title:{lesson.results[0].title}</h1>
+            <p>Lesson Content:{lesson.results[0].content}</p>
             {/* Render child component Lessons with lesson data */}
             {<Lessons {...lesson.results[0]} />}
           </>

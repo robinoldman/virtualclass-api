@@ -162,16 +162,6 @@ function AssignmentCreateForm() {
         </Alert>
       ))}
 
-      <Form.Group>
-        <Form.Label>Content</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="content"
-          value={content}
-          onChange={handleChange}
-        />
-      </Form.Group>
       {/* Display validation errors for the estimated time field */}
       {errors?.content?.map((message, idx) => (
         <Alert variant="warning" key={idx}>

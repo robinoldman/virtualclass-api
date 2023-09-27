@@ -89,10 +89,30 @@ const Lessons = (props) => {
       </Link>
       <Card.Body>
         {/* Display the lesson's title if available */}
-        {title && <Card.Title className="text-center">{title}</Card.Title>}
-        {content && <Card.Text>{content}</Card.Text>}
-        {content && <Card.Text>{difficulty_level}</Card.Text>}
-        {content && <Card.Text>{course}</Card.Text>}
+        {title && (
+          <div>
+            <span className="font-weight-bold">Title:</span> {title}
+          </div>
+        )}
+        {/* Display the lesson's content if available */}
+        {content && (
+          <div>
+            <span className="font-weight-bold">Content:</span> {content}
+          </div>
+        )}
+        {/* Display the course if available */}
+        {course && (
+          <div>
+            <span className="font-weight-bold">Course:</span> {course}
+          </div>
+        )}
+        {/* Display the difficulty level if available */}
+        {difficulty_level && (
+          <div>
+            <span className="font-weight-bold">Difficulty Level:</span>{" "}
+            {difficulty_level}
+          </div>
+        )}
       </Card.Body>
     </Card>
   );

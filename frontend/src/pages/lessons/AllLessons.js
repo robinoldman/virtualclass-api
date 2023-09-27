@@ -37,7 +37,7 @@ function AllLessonsPage({ message, filter = "" }) {
     const fetchLessons = async () => {
       try {
         const { data } = await axiosReq.get(
-          `/lessons/?${filter} search=${query}`
+          `/lessons/?${filter}&search=${query}`
         );
         setLessons(data);
         setHasLoaded(true);
@@ -54,7 +54,6 @@ function AllLessonsPage({ message, filter = "" }) {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles mobile</p>
         <i className={`fas fa-search ${styles.SearchIcon}`} />
         <Form
           className={styles.Searchbar}
@@ -95,9 +94,6 @@ function AllLessonsPage({ message, filter = "" }) {
             <Asset spinner />
           </Container>
         )}
-      </Col>
-      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <p>Popular profiles for desktop</p>
       </Col>
     </Row>
   );
