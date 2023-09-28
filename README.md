@@ -1,6 +1,6 @@
 # Virtual class
 
-Virtual clas is a site that allows primary school classes to run a virtual classroom by posting lessons and assignments.
+Virtual class is a site that allows primary school classes to run a virtual classroom by posting lessons and assignments. I allows teachers to post assignments and lessons to a class. I also allows users to post their own posts under the 'post' section to others in their class commmunity.
 
 ## Table of Contents
 
@@ -74,6 +74,7 @@ F02 Landing Page Image and Text
 
 F03 View Assignments
 • On the assignment page a list of upcoming assignments is displayed. Each assignment summary includes its title, description, due date, and attachments. At a glance, the user can quickly see the details of each assignment. Clicking on an assignment title expands the details, allowing users to view the assignment's full description
+
 F04 View Lessons
 
 ![Alt Text](./readmepic/lesson.png)
@@ -82,7 +83,7 @@ F04 View Lessons
 • When a user clicks on a lesson title on the home page, they are directed to the Lesson Detail page for the selected lesson. Here, the user is presented with the full lesson content, which can include text, images,. Lessons are organized by courses/subjects, and only registered users can access and view lessons. Users can searchthourhg the lessons using the search bar
 
 F05 Comment on Posts
-• Registered users have the ability to comment on posts. . The comment section is located below each post description. Users can enter their comments in a text box and click "Submit." Comments must be approved by an admin user before becoming visible to others. Admin users can log in to the admin pages, review and approve comments for publication.
+• Registered users have the ability to comment on posts. The comment section is located below each post description. Users can enter their comments in a text box and click "Submit." Comments must be approved by an admin user before becoming visible to others. Admin users can log in to the admin pages, review and approve comments for publication.
 
 F06 User Authentication
 • The application offers user authentication features, including user registration, sign-in, and sign-out. New users can register by providing a username, optional email address, and password. After registration, users can sign in to access additional features. Signed-in users can comment on assignments and lessons. Users can sign out by clicking the "Sign out" link in the navigation bar.
@@ -301,3 +302,15 @@ Ensure your application has a CLIENT_ORIGIN key and set it to the URL of your co
 If you had a value for CLIENT_ORIGIN before, update it to match the URL for your combined application.
 Double-check that all your settings are in place, including those from the Deployment section of the Django REST Framework module. Save, commit, and push any code changes.
 Deploy your application from the Deploy tab in your Heroku dashboard.
+
+## next steps
+
+If I had more time I would do the following
+
+- allow the teacher to assign specific lessons and assignments to specific users rather than just creating names in the admin and assigning names from the dropdown
+- allow children to post their reply either as a comment or to send to the teacher.
+
+## credits
+
+- The site was heavily inspired from the code institute moments walkthrough model.
+- Thank you to Lauren my mentor and Patrick my brother who expertly guided me through the project and gave me invaluable tips.
