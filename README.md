@@ -79,11 +79,18 @@ F08 Add and Publish Lessons
 • Similar to assignments, users can add and publish lessons using the admin pages. They can enter lesson details including title, content, associated course/subject, and multimedia elements like images and videos. Lessons are organized by courses/subjects and provide valuable educational content for users.
 • .
 
+## Renewable components
 
+Reusable Component - User Profile Card
+
+In my application, I've strategically utilized reusable components, and an example is the "User Profile Card." This component is pivotal in presenting user profiles throughout the app, ensuring a consistent and visually appealing display.
+The "User Profile Card" consolidates the rendering logic for user profiles, making it a easy to showcase user information in a standardized format. By employing this component, I've achieved code reusability and maintainability, as any updates or enhancements related to user profiles can be efficiently managed within the "User Profile Card." This can be seen on posts and l;essons and in the profile area.
+
+This reusable component eliminates redundancy within my codebase. Instead of duplicating the same user profile rendering logic across various parts of the app.
+
+Furthermore, the "User Profile Card" promotes design consistency. Users can expect a uniform and polished profile display, regardless of where they encounter it.
 
 ## Wireframes
-
-
 
 ## Planning
 
@@ -110,8 +117,6 @@ Agile tool can be found here: [Aglie](https://github.com/users/robinoldman/proje
 9. Summernote: Incorporated to provide a WYSIWYG (What You See Is What You Get) editing experience on the Hike editing screen.
 10. Django allauth: Employed for account registration and authentication functionality.
 11. React
-
-
 
 ### Validator Testing
 
@@ -194,17 +199,80 @@ To establish the connection between your Heroku app and the GitHub repository, f
 
 Final Deployment Steps:
 
-After completing and testing the code changes on localhost, follow these steps to prepare the application for deployment on Heroku:
+After completing and testing the code changes on localhost, follow these steps to prepare the application for deployment
 
-1. Set the DEBUG flag to False in the settings.py file.
-2. Make sure the following line exists in the settings.py file to enable summernote functionality on the deployed environment (CORS security feature): X_FRAME_OPTIONS = 'SAMEORIGIN'.
-3. Ensure that the requirements.txt file is up to date by executing the command: "pip3 freeze --local > requirements.txt".
-4. Push all files to the GitHub repository.
-5. In the Heroku Config Vars for your application, delete the DISABLE_COLLECTSTATIC environment variable.
-6. On the Heroku dashboard, go to the "Deploy" tab for your application and click "Deploy Branch."
-7. The final deployed version of the application can be accessed through the live link provided here: [insert live link here].
+Step 1: Installing WhiteNoise
 
-Please note that the above instructions are a general guideline for deploying a Django project on Heroku. You may need to adapt the steps according to your specific project configuration and requirements.
+In the terminal:
+Ensure you are in the root directory of your project.
+Install WhiteNoise by running the following command:
+
+    pip3 install whitenoise==6.4.0
+
+Step 2: Adding WhiteNoise to Settings
+
+In settings.py:
+In the INSTALLED_APPS list, place 'cloudinary_storage' below 'django.contrib.staticfiles' to prioritize WhiteNoise for static files.
+
+INSTALLED_APPS = [
+# ...
+'django.contrib.staticfiles',
+'cloudinary_storage',
+# ...
+]
+
+In the MIDDLEWARE list, add WhiteNoiseMiddleware just below SecurityMiddleware and above SessionMiddleware.
+
+In the TEMPLATES list, add the following code to the DIRS list to specify where to find React's index.html file for deployment.
+
+TEMPLATES = [
+{ # ...
+'DIRS': [os.path.join(BASE_DIR, 'staticfiles', 'build')], # ...
+},
+]
+
+Add the STATIC_ROOT and WHITENOISE_ROOT variables to specify the locations of admin and React static files during deployment.
+
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    WHITENOISE_ROOT = BASE_DIR / 'staticfiles' / 'build'
+
+Step 3: Updating URLs
+
+In the urls.py file of your Django Rest Framework application:
+Remove the import of 'root_route' from the .views imports.
+Import the TemplateView from the generic Django views.
+Replace the root_route code in the url_patterns list with a TemplateView pointing to the index.html file.
+At the bottom of the file, add the 404 handler to allow React to handle 404 errors.
+
+Step 4: Configuring axiosDefaults.js
+
+In axiosDefaults.js:
+Comment in the axios.defaults.baseURL line and set it to "/api".
+
+Step 5: Collecting Static Files
+
+In the terminal:
+
+Ensure all running servers are terminated (Ctrl+C in running terminals).
+In your env.py file, comment out both the DEBUG and DEV environment variables.
+
+Run the Django server.
+
+Step 6: Preparing for Deployment
+
+Make sure to commit your changes. You are now ready to deploy the project to Heroku. If you haven't deployed to Heroku before, refer to the Deployment section of the Django REST Framework module for additional steps.
+
+Step 7: Heroku Configuration
+
+On Heroku:
+
+Log into your Heroku account and access the dashboard for your DRF application.
+Go to Settings and open the Config Vars.
+Ensure your application has an ALLOWED_HOST key, set to the URL of your combined project without "https://" at the beginning and without a trailing slash at the end.
+Ensure your application has a CLIENT_ORIGIN key and set it to the URL of your combined project with "https://" at the beginning, but without a trailing slash at the end.
+If you had a value for CLIENT_ORIGIN before, update it to match the URL for your combined application.
+Double-check that all your settings are in place, including those from the Deployment section of the Django REST Framework module. Save, commit, and push any code changes.
+Deploy your application from the Deploy tab in your Heroku dashboard.
 
 POSSIBLE DATABASE postgres://mdbzjobfumtyrg:fa41208e2fb417a91d354befaba505c8b456e6581aafe66ad406b1a03bef1941@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com:5432/dc8i184kjh8i7d
 
