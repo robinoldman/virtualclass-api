@@ -9,11 +9,14 @@ from .models import Lessons
 # Create your views here.
 
 class LessonList(generics.ListCreateAPIView):
+    """
+    List and create lessons.
+    """
     queryset = Lessons.objects.all()
     serializer_class = LessonsSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Lessons.objects.annotate(
-
+    # Annotate the queryset, you can add annotations here if needed
     ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
@@ -39,13 +42,13 @@ class LessonList(generics.ListCreateAPIView):
 
 class LessonsDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve a post and edit or delete it if you own it.
+    Retrieves a post and edit or delete it if you own it.
     """
     serializer_class = LessonsSerializer
     permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
         """
-        Get the queryset of lessons for the detail view.
+        Gets the queryset of lessons for the detail view.
         """
         return Lessons.objects.all()

@@ -136,6 +136,8 @@ Agile tool can be found here: [Aglie](https://github.com/users/robinoldman/proje
 - HTML5
 - CSS3
 - Python
+- Javascript
+- React
 
 ### Frameworks, Libraries & Programs Used
 
@@ -147,19 +149,12 @@ Agile tool can be found here: [Aglie](https://github.com/users/robinoldman/proje
 6. Gunicorn: Used as the web server to run Django on Heroku.
 7. psycopg2: A database adapter used to support the connection to the PostgreSQL database.
 8. Cloudinary: Utilized as a storage solution for the application's images.
-9. Summernote: Incorporated to provide a WYSIWYG (What You See Is What You Get) editing experience on the Hike editing screen.
-10. Django allauth: Employed for account registration and authentication functionality.
-11. React
+9. Django allauth: Employed for account registration and authentication functionality.
+10. React
 
 ### Validator Testing
 
 - HTML Validator: As this project uses Django templates, the HTML has been validated by manually clicking through the application pages, copying the source of the rendered pages, and then validating this version of the HTML using the W3C Validator. HTML for the Django admin site pages was not edited, so it has not been validated here. The Signup, Login, and Logout pages from Django allauth were customized and have been validated, with results below.
-
-  - Results for Home: Pass
-  - Results for Millstatt, Bad Kleinkirchheim, Villach, and Wörthersee HTML: Pass
-  - Results for Base, Main, Own Route, Post, Comments, and Route HTML: Pass
-  - Results for Signup: Pass
-  - Results for Login: Pass
 
 - CSS Validator: Pass
 - JavaScript Validator: Pass
@@ -169,10 +164,6 @@ Agile tool can be found here: [Aglie](https://github.com/users/robinoldman/proje
 To ensure the application's compatibility across different browsers, the following approach was taken:
 
 - Chrome DevTools: Used to test the application's responsiveness on various screen sizes during development.
-
-### Manual Testing Test Cases and Results
-
-The application underwent manual testing to validate its functionality and adherence to user story acceptance criteria. The test cases and results are documented in a PDF, which includes cross-references to the corresponding Feature IDs. The test cases were designed based on the acceptance criteria of user stories, enabling thorough testing throughout the development iterations.
 
 ### Known bugs
 
@@ -310,21 +301,3 @@ Ensure your application has a CLIENT_ORIGIN key and set it to the URL of your co
 If you had a value for CLIENT_ORIGIN before, update it to match the URL for your combined application.
 Double-check that all your settings are in place, including those from the Deployment section of the Django REST Framework module. Save, commit, and push any code changes.
 Deploy your application from the Deploy tab in your Heroku dashboard.
-
-POSSIBLE DATABASE postgres://mdbzjobfumtyrg:fa41208e2fb417a91d354befaba505c8b456e6581aafe66ad406b1a03bef1941@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com:5432/dc8i184kjh8i7d
-
-ALLOWED_HOSTS = [
-os.environ.get('ALLOWED_HOST'),
-'8000-robinoldman-virtualclas-pndj7n5qtrs.ws-eu104.gitpod.io',
-'localhost',
-'virtualclassapi-47c98bf9be9a.herokuapp.com'
-]
-
-import os
-
-os.environ['CLOUDIANRY_URL'] = 'cloudinary://962444711949455:IEF70dVolBgsnC0nr*HzBPQZYuA@dwpdkpzlx'
-os.environ['SECRET_KEY'] = 'SecretKeyRobinOldman'
-#os.environ['DEV'] = '1'
-os.environ['CLIENT_ORIGIN'] = 'https://3000-robinoldman-virtualclas-bv0hal62iso.ws-eu104.gitpod.io'
-os.environ['ALLOWED_HOST'] = '8000-robinoldman-virtualclas-pndj7n5qtrs.ws-eu104.gitpod.io'
-os.environ['DATABASE_URL'] = 'postgres://wxnltetf:KWYZI9A94_0gTnTjmjeA7Qb5yGyJWd6*@surus.db.elephantsql.com/wxnltetf'
