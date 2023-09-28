@@ -63,18 +63,37 @@ Virtual clas is a site that allows primary school classes to run a virtual class
 
 F01 Navigation Bar
 • The navigation bar ensures consistent appearance and placement across all pages, facilitating easy and intuitive navigation. It comprises a logo and links to the Home page, Assignments, and Lessons. For non-signed-in users, there are additional links to the Register and Sign In pages. Once signed in, users can access the Home page along with links to new assignments and lessons. The navigation bar also displays the active username and a user icon. It adapts responsively to different screen sizes, transforming into a "burger" menu style on smaller screens.
+
+![navigation](./readmepic/navbar.png)
+
 F02 Landing Page Image and Text
 • Located at the top of the landing page (home page), there is a visually appealing section featuring the feed of the posts.
+
+![landing](./readmepic/assignment.png)
+![Alt Text](./readmepic/feed.png)
+
 F03 View Assignments
 • On the assignment page a list of upcoming assignments is displayed. Each assignment summary includes its title, description, due date, and attachments. At a glance, the user can quickly see the details of each assignment. Clicking on an assignment title expands the details, allowing users to view the assignment's full description
 F04 View Lessons
+
+![Alt Text](./readmepic/lesson.png)
+![Alt Text](./readmepic/feed.png)
+
 • When a user clicks on a lesson title on the home page, they are directed to the Lesson Detail page for the selected lesson. Here, the user is presented with the full lesson content, which can include text, images,. Lessons are organized by courses/subjects, and only registered users can access and view lessons. Users can searchthourhg the lessons using the search bar
+
 F05 Comment on Posts
 • Registered users have the ability to comment on posts. . The comment section is located below each post description. Users can enter their comments in a text box and click "Submit." Comments must be approved by an admin user before becoming visible to others. Admin users can log in to the admin pages, review and approve comments for publication.
+
 F06 User Authentication
 • The application offers user authentication features, including user registration, sign-in, and sign-out. New users can register by providing a username, optional email address, and password. After registration, users can sign in to access additional features. Signed-in users can comment on assignments and lessons. Users can sign out by clicking the "Sign out" link in the navigation bar.
+
+![Alt Text](./readmepic/sign%20in%20.png)
+
 F07 Add and Publish Assignments
 • Users, can add and publish assignments.. New assignments can be added with details like title, description, due date, and attachments. Assignments must have unique titles, and the system generates a slug from the title.
+
+![Alt Text](./readmepic/upload.png)
+
 F08 Add and Publish Lessons
 • Similar to assignments, users can add and publish lessons using the admin pages. They can enter lesson details including title, content, associated course/subject, and multimedia elements like images and videos. Lessons are organized by courses/subjects and provide valuable educational content for users.
 • .
@@ -83,6 +102,8 @@ F08 Add and Publish Lessons
 
 Reusable Component - User Profile Card
 
+![Alt Text](./readmepic/profile.png)
+
 In my application, I've strategically utilized reusable components, and an example is the "User Profile Card." This component is pivotal in presenting user profiles throughout the app, ensuring a consistent and visually appealing display.
 The "User Profile Card" consolidates the rendering logic for user profiles, making it a easy to showcase user information in a standardized format. By employing this component, I've achieved code reusability and maintainability, as any updates or enhancements related to user profiles can be efficiently managed within the "User Profile Card." This can be seen on posts and l;essons and in the profile area.
 
@@ -90,7 +111,19 @@ This reusable component eliminates redundancy within my codebase. Instead of dup
 
 Furthermore, the "User Profile Card" promotes design consistency. Users can expect a uniform and polished profile display, regardless of where they encounter it.
 
-## Wireframes
+## database schema
+
+![Alt Text](./readmepic/data.png)
+
+## wireframe
+
+![Alt Text](./readmepic/wireframedesign.png)
+
+## Testing
+
+![Alt Text](./readmepic/test1.png)
+![Alt Text](./readmepic/test2.png)
+![Alt Text](./readmepic/test3.png)
 
 ## Planning
 
@@ -215,10 +248,14 @@ In settings.py:
 In the INSTALLED_APPS list, place 'cloudinary_storage' below 'django.contrib.staticfiles' to prioritize WhiteNoise for static files.
 
 INSTALLED_APPS = [
+
 # ...
+
 'django.contrib.staticfiles',
 'cloudinary_storage',
+
 # ...
+
 ]
 
 In the MIDDLEWARE list, add WhiteNoiseMiddleware just below SecurityMiddleware and above SessionMiddleware.
