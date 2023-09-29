@@ -53,8 +53,8 @@ const NavBar = () => {
       <NavLink className={styles.NavLink} to="/assignments/create">
         <i className="fa-solid fa-plus"></i>Create Assignment
       </NavLink>
-      <NavLink className={styles.NavLink} to="/signout">
-        <i className="fas fa-sign-out-alt"></i>Sign Out
+      <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
+        <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>
       <NavLink
         className={styles.NavLink}

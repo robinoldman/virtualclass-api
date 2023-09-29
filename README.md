@@ -1,6 +1,8 @@
 # Virtual class
 
-Virtual class is a site that allows primary school classes to run a virtual classroom by posting lessons and assignments. I allows teachers to post assignments and lessons to a class. I also allows users to post their own posts under the 'post' section to others in their class commmunity.
+Virtual class is a site that allows primary school classes to run a virtual classroom by posting lessons and assignments. I allows teachers to post assignments and lessons to a class. I also allows users to post their own posts under the 'post' section to others in their class commmunity. In the lessons section teachers are able to post courses, and difficulty levels. In the feed they are able to edit and delete their posts. In the assignments section teachers are able to post due dates descriptions and estimated times. In the assignment feed pupils are able to search the assignments for subjects and titles.
+
+https://virtualclassapi1-094fa25a6c74.herokuapp.com/
 
 ## Table of Contents
 
@@ -116,6 +118,10 @@ Furthermore, the "User Profile Card" promotes design consistency. Users can expe
 
 ![Alt Text](./readmepic/data.png)
 
+## design choices
+
+the website has been kept simple and easy to use for children. the add post/lesson/assignment have a very similar design to help familiarity. the background was keps simple and bright. A suitible logo was designed to illustrate the purpose of the site. "DM Sans", sans-serif; was chosen as a simple font that children could read easily.
+
 ## wireframe
 
 ![Alt Text](./readmepic/wireframedesign.png)
@@ -124,7 +130,7 @@ Furthermore, the "User Profile Card" promotes design consistency. Users can expe
 
 ![Alt Text](./readmepic/test1.png)
 ![Alt Text](./readmepic/test2.png)
-![Alt Text](./readmepic/test3.png)
+![Alt Text](./readmepic/test4.png)
 
 ## Planning
 
@@ -152,13 +158,6 @@ Agile tool can be found here: [Aglie](https://github.com/users/robinoldman/proje
 8. Cloudinary: Utilized as a storage solution for the application's images.
 9. Django allauth: Employed for account registration and authentication functionality.
 10. React
-
-### Validator Testing
-
-- HTML Validator: As this project uses Django templates, the HTML has been validated by manually clicking through the application pages, copying the source of the rendered pages, and then validating this version of the HTML using the W3C Validator. HTML for the Django admin site pages was not edited, so it has not been validated here. The Signup, Login, and Logout pages from Django allauth were customized and have been validated, with results below.
-
-- CSS Validator: Pass
-- JavaScript Validator: Pass
 
 ### Browser Compatibility
 
