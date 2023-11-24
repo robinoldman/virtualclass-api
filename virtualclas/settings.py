@@ -70,6 +70,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '8000-robinoldman-virtualclas-3rewya0k8qk.ws-eu105.gitpod.io',
     'virtualclassapi1-094fa25a6c74.herokuapp.com',
+    '8000-robinoldman-virtualclas-ldvc8z6zuf7.ws-eu106.gitpod.io',
 ]
 
 

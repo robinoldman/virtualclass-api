@@ -1,0 +1,20 @@
+import os
+
+os.environ['CLOUDINARY_URL'] = 'cloudinary://962444711949455:IEF70dVolBgsnC0nr_HzBPQZYuA@dwpdkpzlx' 
+os.environ['SECRET_KEY'] = 'SecretKeyRobinOldman' 
+#os.environ['DEV'] = '1' 
+os.environ['CLIENT_ORIGIN'] = 'https://3000-robinoldman-virtualclas-bv0hal62iso.ws-eu104.gitpod.io' 
+os.environ['ALLOWED_HOST'] = '8000-robinoldman-virtualclas-pndj7n5qtrs.ws-eu104.gitpod.io' 
+os.environ['DATABASE_URL'] = 'postgres://wxnltetf:KWYZI9A94_0gTnTjmjeA7Qb5yGyJWd6_@surus.db.elephantsql.com/wxnltetf'
+
+to run server python3 manage.py run server
+
+set dev to true
+
+also it will ask to add a host 
+
+for front end got cd frontend
+
+then istall npm
+
+then npm start
